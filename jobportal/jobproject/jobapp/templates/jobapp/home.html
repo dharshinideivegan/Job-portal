@@ -1,0 +1,27 @@
+{% extends "jobapp/base.html" %}
+
+{% block content %}
+    <h1>Welcome to Job Portal</h1>
+    <p>Your dream job is just one click away.</p>
+
+    <br>
+
+    <a href="{% url 'all_jobs' %}" class="btn btn-blue">View All Jobs</a>
+    <a href="{% url 'my_jobs' %}" class="btn btn-green">Submitted Application</a>
+    
+
+    
+
+    {% if user.is_authenticated %}
+        <!-- <a href="{% url 'logout' %}" class="btn btn-green">Logout</a> -->
+    {% else %}
+        <!-- <a href="{% url 'login' %}" class="btn btn-green">Login</a> -->
+    {% endif %}
+    <br>
+
+
+    <!-- {% for job in jobs %}
+    <h3>{{ job.title }}</h3>
+    <a href="{% url 'apply_job' job.slug %}" class="btn btn-blue">Apply</a>
+    {% endfor %} -->
+{% endblock %}

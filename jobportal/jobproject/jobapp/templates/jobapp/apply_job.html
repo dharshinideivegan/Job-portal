@@ -1,0 +1,102 @@
+<style>
+/* Page Background */
+body {
+    background: #f2f7f9;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Main Heading */
+h2 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #0b3d4f;
+}
+
+/* Form Shadow Box */
+form {
+    max-width: 650px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Inner Box */
+.box{
+    border-radius: 20px;
+    background-color: cadetblue;
+    padding: 25px;
+    color:aqua;
+}
+
+/* Label Styling */
+.box label {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Input Fields */
+.box input {
+    width: 70%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    margin-left: 10px;
+}
+
+/* File Input */
+.box input[type="file"] {
+    background: #fff;
+    padding: 8px;
+}
+
+/* Submit Button */
+.btn-blue {
+    background-color: #003f6b;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-blue:hover {
+    background-color: #005c97;
+}
+
+</style>
+
+{% extends 'jobapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Apply for {{ job.title }}</h2>
+
+<form method="POST" enctype="multipart/form-data" class="p-3 shadow">
+    {% csrf_token %}
+    <div class="box">
+    <div> 
+    <label>Your Name</label>&nbsp; &nbsp;
+    {{ form.applicant_name }}
+    </div><br>
+    
+    <div>
+    <label>Email</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    {{ form.applicant_email }}
+    </div><br>
+    
+    <div>
+    <label>Upload Resume</label>
+    {{ form.resume }}
+    </div><br><br>
+    
+    <div>
+    &emsp;&emsp;
+    <button type="submit" class="btn btn-blue">Submit Application</button>
+    </div>
+    </div>
+</form>
+
+{% endblock %}

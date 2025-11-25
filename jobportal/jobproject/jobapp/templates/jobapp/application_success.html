@@ -1,0 +1,58 @@
+{% extends 'jobapp/base.html' %}
+
+{% block content %}
+
+<style>
+    .success-container {
+        max-width: 600px;
+        margin: 60px auto;
+        background-color: #f8fff4;
+        border: 2px solid #28a745;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .success-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    .success-text {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 25px;
+    }
+
+    .btn-back {
+        background-color: #28a745;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .btn-back:hover {
+        background-color: #1e7d34;
+    }
+</style>
+
+
+<div class="success-container">
+    <h2 class="success-title">Application Submitted!</h2>
+
+    <p class="success-text">
+        Your application for <strong>{{ job.title }}</strong> has been submitted successfully.
+    </p>
+
+    <a href="{% url 'all_jobs' %}" class="btn-back">Back to Jobs</a>
+</div>
+
+{% endblock %}
+

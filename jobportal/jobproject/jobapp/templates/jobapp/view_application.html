@@ -1,0 +1,95 @@
+<style>
+
+/* Page background */
+body {
+    background: #eef3f7;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Page heading */
+h2 {
+    text-align: center;
+    color: #0b3d4f;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* List container */
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 70%;
+    margin: auto;
+}
+
+/* Each application card */
+ul li {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+/* Hover effect */
+ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Applicant name */
+ul li b {
+    font-size: 18px;
+    color: #003f6b;
+}
+
+/* Resume link */
+ul li a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #005c96;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #005c96;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+ul li a:hover {
+    background: #005c96;
+    color: white;
+}
+
+/* No applications message */
+p {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+}
+
+</style>
+
+{% extends "jobapp/base.html" %}
+
+{% block content %}
+<h2>Applications for {{ job.title }}</h2>
+
+<ul>
+    {% if applications %}
+        {% for app in applications %}
+            <li style="margin-bottom: 15px;">
+                <b>{{ app.applicant_name }}</b> ({{ app.applicant_email }})<br>
+
+                {% if app.resume %}
+                    <a href="{{ app.resume.url }}" download>Download Resume</a>
+                {% else %}
+                    <span>No resume uploaded</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    {% else %}
+        <p>No applications yet.</p>
+    {% endif %}
+</ul>
+{% endblock %}

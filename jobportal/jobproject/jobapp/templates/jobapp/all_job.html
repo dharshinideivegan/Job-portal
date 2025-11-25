@@ -1,0 +1,182 @@
+{% extends "jobapp/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #aaa;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .job-card {
+        width: 90%;
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        transition: 0.3s;
+    }
+
+    .job-card:hover {
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        transform: scale(1.01);
+    }
+
+    .job-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .job-image {
+        width: 100%;
+        max-width: 380px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .job-info {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .job-info h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .job-info p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .btn-view, .btn-apply {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    .btn-view {
+        background-color: #28a745;
+    }
+
+    .btn-view:hover {
+        background-color: #1e7d34;
+    }
+
+    .btn-apply {
+        background-color: #007bff;
+    }
+
+    .btn-apply:hover {
+        background-color: #0056b3;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+</style>
+
+
+<h2 class="page-title">Available Jobs</h2>
+
+<!-- Search -->
+<div class="search-box">
+    <form method="GET">
+        <input type="text" name="q" class="search-input"
+               placeholder="Search jobs..." value="{{ request.GET.q }}">
+    </form>
+</div>
+
+<!-- Job Cards -->
+{% for job in jobs %}
+<div class="job-card">
+    <div class="job-content">
+
+        <!-- Company Image -->
+        <div>
+    {% if job.title == "Software Developer" %}
+        <img src="{% static 'image/software developer.jpg' %}" class="job-image" alt="Software Developer">
+
+    {% elif job.title == "Data Analyst" %}
+        <img src="{% static 'image/dataanalyst.jpg' %}" class="job-image" alt="Data Analyst">
+
+    {% elif job.title == "Web Developer" %}
+        <img src="{% static 'image/Python-developer.jpg' %}" class="job-image" alt="Web Designer">
+
+    {% elif job.title == "Backend Developer" %}
+        <img src="{% static 'image/backend developer.png' %}" class="job-image" alt="Backend Developer">
+
+    {% elif job.title == "Database Administrator" %}
+        <img src="{% static 'image/data administrator.webp' %}" class="job-image" alt="Database Administrator"> 
+        
+    {% elif job.title == "Cybersecurity Engineer" %}
+        <img src="{% static 'image/cybersecurity engineer.jpg' %}" class="job-image" alt="Cybersecurity Engineer">
+        
+    {% elif job.title == "DevOps Engineer" %}
+        <img src="{% static 'image/DevOps engineer.jpg' %}" class="job-image" alt="DevOps Engineer">    
+        
+    {% elif job.title == "Web Designer" %}
+        <img src="{% static 'image/web designer.jpg' %}" class="job-image" alt="Python Developer">
+        
+    {% elif job.title == "Test Engineer" %}
+        <img src="{% static 'image/Test-engineer.jpg' %}" class="job-image" alt="Test Engineer">
+        
+    {% elif job.title == "Frontend Developer" %}
+        <img src="{% static 'image/frontend developer.webp' %}" class="job-image" alt="Frontend Developer">    
+
+    {% else %}
+        <img src="{% static 'image/default.png' %}" class="job-image" alt="Default Job Image">
+    {% endif %}
+</div>
+
+
+        <!-- Job Details -->
+        <div class="job-info">
+            <h3>{{ job.title }}</h3>
+            <p><strong>Company:</strong> {{ job.employer.company_name }}</p>
+            <p><strong>Location:</strong> {{ job.location }}</p>
+
+            <a href="{% url 'job_detail' job.slug %}" class="btn-view">View Job</a>
+            <a href="{% url 'apply_job' job.slug %}" class="btn-apply">Apply Now</a>
+        </div>
+
+    </div>
+</div>
+{% empty %}
+    <p class="center" style="color: red; margin-top: 30px;">No jobs found.</p>
+{% endfor %}
+
+{% endblock %}
+

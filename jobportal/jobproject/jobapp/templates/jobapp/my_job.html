@@ -1,0 +1,108 @@
+<style>
+
+/* Background */
+body {
+    background: #f0f4f8;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Page heading */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #0b3d4f;
+}
+
+/* Jobs list container */
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 70%;
+    margin: auto;
+}
+
+/* Each job item */
+ul li {
+    background: #ffffff;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Job title text */
+ul li span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #003f6b;
+}
+
+/* View Applications link */
+ul li a {
+    text-decoration: none;
+    font-size: 15px;
+    padding: 6px 12px;
+    background: #005c96;
+    color: white;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+/* Hover effect on button */
+ul li a:hover {
+    background: #003f6b;
+}
+
+/* No jobs message */
+ul li:last-child {
+    text-align: center;
+    color: #666;
+}
+
+</style>
+
+<!-- <style>
+    *{
+        text-align: center;
+        background-color: cornsilk;
+    }
+    li{
+        list-style: none;
+    }
+    h2{
+        margin-top: 200px;
+        font-size: 40px;
+    }
+    ul{
+        font-size: 30px;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    
+</style> -->
+{% block content %}
+<h2>My Posted Jobs</h2>
+
+<ul>
+    {% if jobs %}
+        {% for job in jobs %}
+            <li>
+                {{ job.title }} —
+                <a href="{% url 'view_applications' job.id %}">View Applications</a>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li>You have not posted any jobs yet.</li>
+    {% endif %}
+</ul>
+{% endblock %}
